@@ -98,10 +98,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    boolean startofcube(){
-        if(color == red || blue green){
+   boolean startofcube(RGB color){
+        RGB red = new RGB(255,0,0);
+        RGB blue = new RGB(0,0,255);
+        RGB green = new RGB(0,255,0);
+        RGB yellow = new RGB(255,255,0);
+        RGB orange = new RGB(255,140,0);
+        RGB white = new RGB(255,255,255);
+        if(color == red || color == blue || color == green || color == yellow || color == orange || color == white ){
             return true;
         }
+        return false;
     }
 
     private void readimage(){
@@ -122,22 +129,78 @@ public class MainActivity extends AppCompatActivity {
                 int r = Color.red(pixel);
                 int g = Color.green(pixel);
                 int b = Color.blue(pixel);
-                int color  = originalcolor(r,g,b);
-                if(startofcube(color)){
+                RGB color  = originalcolor(r,g,b);
+                Log.i("original color"," " + color);
+                if(startofcube(color)) {
+                    for (int i = 0; i < cubevalues.length; i++) {
+                        RGB red = new RGB(255, 0, 0);
+                        RGB blue = new RGB(0, 0, 255);
+                        RGB green = new RGB(0, 255, 0);
+                        RGB yellow = new RGB(255, 255, 0);
+                        RGB orange = new RGB(255, 140, 0);
+                        RGB white = new RGB(255, 255, 255);
 
-                    int i = 0;
-                    if(color == red){
-                        cubevalues[i] = 6;
+                        //int i = 0;
+                        if (color == red) {
+                            cubevalues[i] = 6;
+                        }
+                        else if (color == blue) {
+                            cubevalues[i] = 5;
+
+                        }
+                        else if(color == green){
+                            cubevalues[i] = 4;
+                        }
+                        else if(color == yellow){
+                            cubevalues[i] = 3;
+                        }
+                        else if(color == orange){
+                            cubevalues[i] = 2;
+                        }
+                        else if(color == white){
+                            cubevalues[i] = 1;
+                        }
                     }
-                    else if()
                 }
-
 
                 Log.i("color","R("+r+")\n"+"G("+g+")\n"+"B("+b+")");
                 textView.setBackgroundColor(Color.rgb(r,g,b));
                 textView.setText("R("+r+")\n"+"G("+g+")\n"+"B("+b+")");
             }
         }
+    }
+
+    public RGB originalcolor(int r,int g,int b){
+        RGB color= new RGB(0,0,0);
+                if(r>=100 && r<=255  && g<=100 && b<=100 ){
+                    RGB red = new RGB(255,0,0);
+                    return red;
+                }
+                else if(r==0 && g>=20 || g<=255 && b==0){
+                    RGB green = new RGB(0,255,0);
+                    return green;
+                }
+                else if(r==0 && g==0 && b>=30 && b<=255){
+                    RGB blue = new RGB(0,0,255);
+                    return blue;
+                }
+                else if(r>=240 && r<=255 && g>=230 && g<=255 && b<=100 ) {
+                    RGB yellow = new RGB(255,255,0);
+                    return yellow;
+
+                }
+               /* else if(){ // Adding Orange RGB Range
+
+                    RGB orange = new RGB(255,140,0);
+                    return orange;
+                }
+                else if(){ // Adding White RGB Range
+
+                    RGB white = new RGB(255,255,255);
+                    return white;
+                }*/
+
+        return color;
     }
 
 
